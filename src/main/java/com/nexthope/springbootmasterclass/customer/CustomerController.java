@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "api/v1/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -16,6 +17,11 @@ public class CustomerController {
     @GetMapping
     List<Customer> getCustomers(){
         return customerService.getCustomers();
+    }
+
+    @GetMapping(path = "{customerId}")
+    Customer getCustomer(@PathVariable("customerId") Long customerId){
+        return customerService.getCustomer(customerId);
     }
 
     @PostMapping
