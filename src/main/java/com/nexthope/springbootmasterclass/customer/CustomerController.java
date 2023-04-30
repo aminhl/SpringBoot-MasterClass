@@ -1,5 +1,6 @@
 package com.nexthope.springbootmasterclass.customer;
 
+import com.nexthope.springbootmasterclass.exception.ApiRequestException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +24,13 @@ public class CustomerController {
     @GetMapping(path = "{customerId}")
     Customer getCustomer(@PathVariable("customerId") Long customerId){
         return customerService.getCustomer(customerId);
+    }
+
+    @GetMapping(path = "{customerId}/exception")
+    Customer getCustomerException(@PathVariable("customerId") Long customerId){
+        throw new ApiRequestException(
+                "Customer with id: " + customerId + " does not exist!"
+        );
     }
 
     @PostMapping
