@@ -2,6 +2,7 @@ package com.nexthope.springbootmasterclass.customer;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void createNewCustomer(@RequestBody Customer customer){
+    public void createNewCustomer(@Valid @RequestBody Customer customer){
         System.out.println("POST REQUEST");
         System.out.println(customer);
     }
