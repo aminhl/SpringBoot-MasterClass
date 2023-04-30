@@ -21,4 +21,17 @@ public class ApiExceptionHandler {
         );
         return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity<Object> handleNotFoundException(
+            NotFoundException notFoundException
+    ){
+        ApiException apiException = new ApiException(
+                notFoundException.getMessage(),
+                notFoundException,
+                HttpStatus.NOT_FOUND,
+                ZonedDateTime.now()
+        );
+        return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
+    }
 }
