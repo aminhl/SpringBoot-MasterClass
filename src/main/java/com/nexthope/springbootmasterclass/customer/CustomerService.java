@@ -1,5 +1,6 @@
 package com.nexthope.springbootmasterclass.customer;
 
+import com.nexthope.springbootmasterclass.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,6 @@ public class CustomerService {
                 .filter(customer -> customer.getId().equals(customerId))
                 .findFirst()
                 .orElseThrow(
-                        () -> new IllegalStateException("Customer with id " + customerId  +
-                        " not found!"));
+                        () -> new NotFoundException("Customer with id " + customerId  + " not found!"));
     }
 }
