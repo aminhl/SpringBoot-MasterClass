@@ -13,12 +13,12 @@ public class CustomerConfiguration {
     @Bean
     CommandLineRunner commandLineRunner(){
         return args -> {
-            System.out.println("Inside CommandLineRunner!");
+            //System.out.println("Inside CommandLineRunner!");
         };
     }
 
     @Bean
     CustomerRepo customerRepo(){
-        return useFakeCustomerRepo ? new CustomFakeRepository() : new CustomerRepository();
+        return new CustomFakeRepository();
     }
 }

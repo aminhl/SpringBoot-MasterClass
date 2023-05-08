@@ -1,7 +1,6 @@
 package com.nexthope.springbootmasterclass.customer;
 
 import com.nexthope.springbootmasterclass.exception.NotFoundException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,21 +8,19 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    private final CustomerRepo customerRepo;
+    private final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepo customerRepo) {
-        this.customerRepo = customerRepo;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     List<Customer> getCustomers(){
-        return customerRepo.getCustomers();
+        return customerRepository.findAll();
     }
 
     Customer getCustomer(Long customerId){
-        return getCustomers()
-                .stream()
-                .filter(customer -> customer.getId().equals(customerId))
-                .findFirst()
+        return customerRepository
+                .findById(customerId)
                 .orElseThrow(
                         () -> new NotFoundException("Customer with id " + customerId  + " not found!"));
     }
